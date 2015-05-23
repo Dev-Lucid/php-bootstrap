@@ -18,7 +18,7 @@ class bootstrap_label extends bootstrap_element
             $this->children[] = $this->text;
         }
 
-        $this->add_class('btn-'.$this->modifier);
+        $this->add_class('label-'.$this->modifier);
         return '';
     }
 }

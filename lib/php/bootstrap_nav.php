@@ -4,7 +4,7 @@
 class bootstrap_nav extends bootstrap_element
 {
     public $tag          = 'ul';
-    public $type         = 'tabs'; # pills, stacked
+    public $type         = 'tabs'; # pills, stacked, navbar
     public $justified    = false;
     public $attributes   = [
         'class'=>['nav'=>true],
@@ -19,6 +19,9 @@ class bootstrap_nav extends bootstrap_element
                 break;
             case 'pills':
                 $this->add_class('nav-pills');
+                break;
+            case 'navbar':
+                $this->add_class('navbar-nav');
                 break;
             case 'stacked':
                 $this->add_class('nav-pills');
@@ -35,7 +38,11 @@ class bootstrap_nav extends bootstrap_element
 
     public function pre_child($child)
     {
-        $html = '<li role="presentation"';
+        $html = '<li';
+        if ($this->type !== 'navbar')
+        {
+            $html .= ' role="presentation"';
+        }
 
         if (is_object($child))
         {

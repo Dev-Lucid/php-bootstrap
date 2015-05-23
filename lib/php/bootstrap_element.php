@@ -9,6 +9,8 @@ class bootstrap_element
     public $pre_children  = '';
     public $post_children = '';
     public $children      = [];
+    public $id;
+    public $style         = '';
     public $attributes    = [
         'class'=>[],
     ];
@@ -25,10 +27,8 @@ class bootstrap_element
             }
         }
 
-        lucid::log('instantiating new '.$element.': '.(is_string($options)).'/'.(is_array($options)));
         if(is_string($options) or is_numeric($options))
         {
-            lucid::log('setting up new '.$element.' with options '.$options);
             $this->add($options);
         }
         else if (is_array($options))
@@ -46,7 +46,6 @@ class bootstrap_element
                 }
                 else
                 {
-                    lucid::log('setting '.$key.' to '.str_replace("\n","\t",print_r($value,true)));
                     $this->$key = $value;
                 }
             }
@@ -55,6 +54,9 @@ class bootstrap_element
 
     public function render()
     {
+        $this->use_property_as_attribute('style');
+        $this->use_property_as_attribute('id');
+        
         $html = '';
         $html .= $this->pre_render();
         $html .= $this->pre_html;
@@ -112,7 +114,7 @@ class bootstrap_element
                 if (count($classes) > 0)
                 $html .= ' '.$name.'="'.implode(' ',$classes).'"';
             }
-            else
+            else if ($value !== '' and !is_null($value))
             {
                 $html .= ' '.$name.'="'.$value.'"';
             }
@@ -172,47 +174,75 @@ class bootstrap_element
         {
             $this->attributes[$name] = $default_value;
         }
+        return $this;
     }
 
-    public function add($element,$options=null)
-    {
-        if(is_object($element))
+    public function add($elements)
+    {   
+        if( is_array($elements))
         {
-            
-            $element->parent = $this;
+            #lucid::log('$elements was an array, looping over and calling add on all indexes');
+            foreach($elements as $element)
+            {
+                $this->add($element);
+            }
         }
-        $this->children[] = $element;
+        else
+        {
+            #lucid::log('$elements was NOT an array, adding directly');
+            if(is_object($elements))
+            {
+                $elements->parent = $this;
+                $this->children[] = $elements;
+            }
+            else
+            {
+                $this->children[] = $elements;    
+            } 
+        }
         return $this;
     }
 
     public function center($new_value = true)
     {
         $this->attributes['class']['center-block'] = $new_value;
+        return $this;
     }
 
     public function pull_left($new_value = true)
     {
         $this->attributes['class']['pull-left'] = $new_value;
+        return $this;
     }
 
     public function pull_right($new_value = true)
     {
         $this->attributes['class']['pull-right'] = $new_value;
+        return $this;
     }
 
     public function clearfix($new_value = true)
     {
         $this->attributes['class']['clearfix'] = $new_value;
+        return $this;
     }
 
     public function show($new_value = true)
     {
         $this->attributes['class']['show'] = $new_value;
+        return $this;
     }
 
     public function hide($new_value = true)
     {
         $this->attributes['class']['hide'] = $new_value;
+        return $this;
+    }
+
+    public function __call($property,$value=null)
+    {
+        $this->$property = $value;
+        return $this;
     }
 }
 
