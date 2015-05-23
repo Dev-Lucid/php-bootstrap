@@ -25,6 +25,6 @@
         "php": ">=5.2.0"
     },
     "autoload": {
-        "classmap": ["bootstrap.php"]
+        "classmap": ["lib/php/bootstrap.php"]
     }
 }
