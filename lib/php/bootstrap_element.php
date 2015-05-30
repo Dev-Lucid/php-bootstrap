@@ -100,25 +100,33 @@ class bootstrap_element
         $html = '';
         foreach($this->attributes as $name=>$value)
         {
-            
+
             if ($name == 'class')
             {
-                $classes = [];
-                foreach($value as $class_name=>$on)
-                {
-                    if ($on === true)
-                    {
-                        $classes[] = $class_name;
-                    }
-                }
-                if (count($classes) > 0)
-                $html .= ' '.$name.'="'.implode(' ',$classes).'"';
+                $html .= $this->build_class_attribute($value);
             }
             else if ($value !== '' and !is_null($value))
             {
                 $html .= ' '.$name.'="'.$value.'"';
             }
             
+        }
+        return $html;
+    }
+
+    protected function build_class_attribute($hash)
+    {
+        $html = '';
+        $classes = [];
+        foreach($hash as $class_name=>$on)
+        {
+            if ($on === true)
+            {
+                $classes[] = $class_name;
+            }
+        }
+        if (count($classes) > 0){
+            $html = ' class="'.implode(' ',$classes).'"';
         }
         return $html;
     }
@@ -242,6 +250,32 @@ class bootstrap_element
     public function __call($property,$value=null)
     {
         $this->$property = $value;
+        return $this;
+    }
+
+    public function sizes($sizes)
+    {
+        $index_aliases = ['xs','sm','md','lg'];
+        for($i=0;$i<count($sizes);$i++)
+        {
+            if(!is_null($sizes[$i]))
+            {
+                $this->add_class('col-'.$index_aliases[$i].'-'.$sizes[$i]);
+            }
+        }
+        return $this;
+    }
+
+    public function offsets($offsets)
+    {
+        $index_aliases = ['xs','sm','md','lg'];
+        for($i=0;$i<count($offsets);$i++)
+        {
+            if(!is_null($offsets[$i]))
+            {
+                $this->add_class('col-'.$index_aliases[$i].'-offset-'.$offsets[$i]);
+            }
+        }
         return $this;
     }
 }

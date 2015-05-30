@@ -17,7 +17,7 @@ class php_bootstrap
                     'class'=>['container'=>true]
                 ]
             ],
-            'container-fluid'=>[
+            'container_fluid'=>[
                 'attributes'=>[
                     'class'=>['container-fluid'=>true]
                 ]

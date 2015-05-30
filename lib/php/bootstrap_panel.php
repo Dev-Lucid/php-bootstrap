@@ -23,7 +23,7 @@ class bootstrap_panel extends bootstrap_element
         }
         if($this->footer !== '')
         {
-            $this->post_children = $this->post_children.'<div class="panel-footer">'.$this->footer.'</div>';
+            $this->post_children = $this->post_children.'<div class="panel-footer clearfix">'.$this->footer.'</div>';
         }
 
 

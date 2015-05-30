@@ -8,6 +8,9 @@ class bootstrap_input extends bootstrap_element
     public $suffix      = '';
     public $onfocus     = '';
     public $onblur      = '';
+    public $label       = '';
+    public $value       = '';
+    public $div_class   = ['form-group'=>true];
 
     protected function find_form()
     {
@@ -35,15 +38,31 @@ class bootstrap_input extends bootstrap_element
         {
             $label_attribs = ' class="sr-only"';
         }
+        if(!is_null($form) and $form->has_class('form-horizontal'))
+        {
+            $label_attribs = ' class="col-sm-2 control-label"';
+            $this->div_class['col-sm-10'] = true;
+        }
 
         $this->use_property_as_attribute('name');
         $this->use_property_as_attribute('onblur');
         $this->use_property_as_attribute('onfocus');
-        $this->attributes['placeholder'] = strip_tags($this->label);
+        $this->use_property_as_attribute('value');
+        
         
         $html = '';
-        $html .= '<div class="form-group">';
-        $html .= '<label for="'.$this->name.'"'.$label_attribs.'>'.$this->label.'</label>';
+        $html .= '<div'.$this->build_class_attribute($this->div_class).'>';
+
+       
+        if(!is_null($form) and $form->label_style == 'label')
+        {
+            $html .= '<label for="'.$this->name.'"'.$label_attribs.'>'.$this->label.'</label>';
+        }
+        else
+        {
+            $this->attributes['placeholder'] = strip_tags($this->label);
+        }
+
 
         if ($this->prefix !== '' or $this->suffix !== '')
         {
@@ -55,6 +74,27 @@ class bootstrap_input extends bootstrap_element
         }
 
         return $html;
+    }
+
+    public function div_add_class($name)
+    {
+        $this->div_class[$name] = true;
+        return $this;
+    }
+
+    public function div_remove_class()
+    {
+        $this->div_class[$name] = false;
+        return $this;
+    }
+
+    public function div_has_class($name)
+    {
+        if (!isset($this->div_class[$name])){
+            return false;
+        }
+        
+        return ($this->div_class[$name] === true);
     }
 
     public function post_render()
