@@ -7,6 +7,7 @@ class bootstrap_button extends bootstrap_element
     public $modifier   = 'default';  # default, primary, warning, error, info, success
     public $type       = 'button';   # button, submit, link
     public $onclick    = '';
+    public $href       = '';
     public $size       = 'md';       # xs, sm, md, lg (md results in no additional class being added)
     public $block      = false;
     public $active     = false;
@@ -25,8 +26,17 @@ class bootstrap_button extends bootstrap_element
             $this->type = 'button';
             $this->add_class('btn-link');
         }
-        $this->use_property_as_attribute('type');
-        $this->use_property_as_attribute('onclick');
+
+        if ($this->href !== '')
+        {
+            $this->tag = 'a';
+            $this->use_property_as_attribute('href');
+        }
+        else
+        {
+            $this->use_property_as_attribute('type');
+            $this->use_property_as_attribute('onclick');            
+        }
 
         # md doesn't require an additional class, all other sizes do
         if ($this->size !== 'md')

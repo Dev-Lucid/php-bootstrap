@@ -11,6 +11,7 @@ class bootstrap_button_group_cancel_save extends bootstrap_element
     public $save_label = 'Save';
     public $save_icon  = 'ok';
     public $save_modifier = 'primary';
+    public $pull = 'right';
 
     public $attributes = [
         'role'=>'group',
@@ -20,6 +21,11 @@ class bootstrap_button_group_cancel_save extends bootstrap_element
 
     public function pre_render()
     {
+        if ($this->pull == 'right')
+        {
+            $this->pull_right();    
+        }
+
         $cancel_label = $this->cancel_label;
         if($this->cancel_icon !== '')
         {

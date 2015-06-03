@@ -4,6 +4,7 @@ class bootstrap_element
 {
     public $tag           = 'div';
     public $parent        = null;
+    public $last_child    = null;
     public $pre_html      = '';
     public $post_html     = '';
     public $pre_children  = '';
@@ -201,10 +202,12 @@ class bootstrap_element
             if(is_object($elements))
             {
                 $elements->parent = $this;
+                $this->last_child = $elements;
                 $this->children[] = $elements;
             }
             else
             {
+                $this->last_child = $elements;
                 $this->children[] = $elements;    
             } 
         }
@@ -249,7 +252,7 @@ class bootstrap_element
 
     public function __call($property,$value=null)
     {
-        $this->$property = $value;
+        $this->$property = $value[0];
         return $this;
     }
 
