@@ -282,5 +282,3 @@ class bootstrap_element
         return $this;
     }
 }
-
-?>

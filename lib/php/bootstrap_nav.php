@@ -78,4 +78,3 @@ class bootstrap_nav extends bootstrap_element
     }
 }
 
-?>

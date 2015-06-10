@@ -6,7 +6,7 @@ class bootstrap_button_group_edit_delete extends bootstrap_element
     public $edit_label         = '';
     public $edit_icon          = 'edit';
     public $edit_url           = '';
-    public $edit_modifier      = 'primary';
+    public $edit_modifier      = 'info';
     
     public $delete_label       = '';
     public $delete_icon        = 'trash';

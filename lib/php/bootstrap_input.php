@@ -10,6 +10,7 @@ class bootstrap_input extends bootstrap_element
     public $onblur      = '';
     public $label       = '';
     public $value       = '';
+    public $help        = '';
     public $div_class   = ['form-group'=>true];
 
     protected function find_form()
@@ -109,6 +110,10 @@ class bootstrap_input extends bootstrap_element
             $html .= '</div>';
         }
 
+        if ($this->help !== '')
+        {
+            $html .= '<p class="help-block">'.$this->help.'</p>';
+        }
         $html .= '</div>';
         return $html;
     }

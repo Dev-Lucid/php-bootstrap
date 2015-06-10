@@ -33,11 +33,21 @@ class bootstrap_input_select extends bootstrap_input
         {
             if(is_array($data))
             {
-                $this->options .= '<option value="'.$data[$value_field].'">'.$data[$label_field].'</option>';
+                $this->options .= '<option value="'.$data[$value_field].'"';
+                if ($data[$value_field] === $this->value)
+                {
+                    $this->options .= ' selected="selected"';
+                }
+                $this->options .= '>'.$data[$label_field].'</option>';
             }
             else
             {
-                $this->options .= '<option value="'.$data->$value_field.'">'.$data->$label_field.'</option>';
+                $this->options .= '<option value="'.$data->$value_field.'"';
+                if ($data->$value_field === $this->value)
+                {
+                    $this->options .= ' selected="selected"';
+                }
+                $this->options .= '>'.$data->$label_field.'</option>';
             }
         }
         $this->add($this->options);
