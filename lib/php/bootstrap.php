@@ -27,6 +27,11 @@ class php_bootstrap
                     'class'=>['row'=>true]
                 ]
             ],
+            'input_group'=>[
+                'attributes'=>[
+                    'class'=>['input-group'=>true]
+                ]
+            ],
 
             # misc text formatting
             'paragraph'=>['tag'=>'p',],
