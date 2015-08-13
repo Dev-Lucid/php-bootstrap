@@ -23,22 +23,22 @@ class bootstrap_input_textarea extends bootstrap_input
         {
             $label_attribs = ' class="sr-only"';
         }
-
+        $this->add_class('form-control');
         $html = '';
-        $html .= '<div class="form-group">';
-        $html .= '<label for="'.$this->name.'"'.$label_attribs.'>'.$this->label.'</label>';
+        #$html .= '<div class="form-group">';
+        #$html .= '<label for="'.$this->name.'"'.$label_attribs.'>'.$this->label.'</label>';
 
         $this->use_property_as_attribute('name');
         $this->use_property_as_attribute('rows','',3);
         $this->use_property_as_attribute('cols','',40);
         $this->attributes['placeholder'] = strip_tags($this->label);
-        
+        $this->add($this->value);
         return $html;
     }
 
     public function post_render()
     {
-        return '</div>';
+        #return '</div>';
     }
 }
 
