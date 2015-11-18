@@ -1,0 +1,30 @@
+{
+    "name": "Dev-Lucid/php-bootstrap",
+    "type": "library",
+    "description": "A php library for generating bootstrap HTML",
+    "keywords": ["php", "bootstrap"],
+    "homepage": "https://github.com/Dev-Lucid/php-bootstrap",
+    "support": {
+        "issues": "https://github.com/Dev-Lucid/php-bootstrap/issues",
+        "source": "https://github.com/Dev-Lucid/php-bootstrap"
+    },
+    "authors": [
+        {
+            "name": "Mike Thorn",
+            "email": "mthorn@devlucid.com",
+            "homepage": "http://devlucid.com",
+            "role": "Developer"
+        }
+    ],
+    "license": [
+        "BSD-2-Clause",
+        "BSD-3-Clause",
+        "BSD-4-Clause"
+    ],
+    "require": {
+        "php": ">=5.2.0"
+    },
+    "autoload": {
+        "classmap": ["lib/php/bootstrap.php"]
+    }
+}
